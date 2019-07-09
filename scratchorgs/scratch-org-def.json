@@ -1,0 +1,20 @@
+{
+	"edition": "Enterprise",
+	"language": "en_US",
+	"features": ["Communities", "ServiceCloud", "FieldService", "PersonAccounts", "StateAndCountryPicklist"],
+	"settings": {
+		"orgPreferenceSettings": {
+			"networksEnabled": true,
+			"s1DesktopEnabled": true,
+			"s1EncryptedStoragePref2": false,
+			"translation": true
+		},
+		"omniChannelSettings": {
+			"enableOmniChannel": true
+		},
+		"nameSettings": {
+			"enableMiddleName": true,
+			"enableNameSuffix": true
+		}
+	}
+}

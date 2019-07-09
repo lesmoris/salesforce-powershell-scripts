@@ -1,0 +1,63 @@
+Basic Ops:
+----------
+
+Auth:
+	sfdx force:auth:jwt:grant -d -a DevHub -r https://login.salesforce.com/ -i <client_id> -u adminuser@vso.com.neo -f server.key
+
+	cls | sfdx force:auth:web:login -d -a DevHub
+
+Create:
+	cls | sfdx force:org:create -f scratch-org-def.json -a PRScratchOrg
+	
+Install needed packages:	
+	sfdx force:package:install -u PRScratchOrg -r --package <Package Version ID>
+	sfdx force:package:install -u PRScratchOrg -r --package <Package Version ID>
+
+DeployUsingANT:	
+	Create package.xml first
+		sgp -s ./src -o ./src -a 45.0
+	Deploy
+		cls | sfdx force:mdapi:deploy -d src/ -u PRScratchOrg
+	If you want A LOT of info
+		cls | sfdx force:mdapi:deploy -d src/ --verbose
+	To check the results:
+		cls | sfdx force:mdapi:deploy:report -u PRScratchOrg -w -1
+	To check the results to a file:
+		cls | sfdx force:mdapi:deploy:report -u PRScratchOrg > output.txt
+
+Delete:
+	cls | sfdx force:org:delete -p -u PRScratchOrg 
+
+Misc:
+-----
+
+PushCode (using sfdx):
+	sfdx force:source:push -u PRScratchOrg -f
+	
+Open:
+	sfdx force:org:open -u PRScratchOrg
+
+List:
+	cls | sfdx force:org:list --all
+	
+Generate Password:
+	sfdx force:user:password:generate -u PRScratchOrg
+	
+Logout:
+	sfdx force:auth:logout -u DevHub -p
+
+Packages:
+---------
+
+To get the currently installed and their IDs:
+	sfdx force:package:installed:list -u DevHub
+	sfdx force:package:installed:list -u PRScratchOrg
+	
+To install a new one:
+	 sfdx force:package:install -u PRScratchOrg -r --package <Package Version ID>
+	 This will return a request id. See next.
+	 
+To check if the package is succesfully installed:
+	sfdx force:package:install:report -u PRScratchOrg -i <request id>
+
+IPs to allow:
